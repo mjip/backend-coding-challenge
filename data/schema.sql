@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS geonames (
+	id INTEGER PRIMARY KEY,
+	name VARCHAR(200) NOT NULL,
+	ascii_name VARCHAR(200),
+	alt_name VARCHAR(10000),
+	latitude DOUBLE NOT NULL,
+	longitude DOUBLE NOT NULL,
+	feat_class CHAR(1),
+	feat_code VARCHAR(10),
+	country CHAR(2),
+	cc2 VARCHAR(200),
+	admin1 VARCHAR(20),
+	admin2 VARCHAR(80),
+	admin3 VARCHAR(20),
+	admin4 VARCHAR(20),
+	population INT8,
+	elevation INTEGER,
+	dem INTEGER,
+	tz VARCHAR(40),
+	modified_at DATE
+);
