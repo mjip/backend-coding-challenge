@@ -4,16 +4,25 @@ autocomplete-mjip-challenge.me
 My submission of the backend challenge for Coveo.
 - Author: Marie Payne
 
-[[_TOC_]]
+Table of Contents
+=================
+* [The Framework](#the-framework)
+* [How It Works](#how-it-works)
+	* [The Endpoint](#the-endpoint)
+	* [Examples](#examples)
+	* [Scoring Metrics](#scoring-metrics)
+* [Installation](#installation)
+* [Ideas for Future Features](#ideas-for-future-features)
 
-## The framework
+
+## The Framework
 I choose to deploy the REST endpoint as a Flask app, a Python web framework I'm already familiar with. Flask doesn't validate queries out-of-the-box, so I also employed Flask-RESTful and webargs. The data is stored in a PostgreSQL database.
 I deployed it through the free-tier of AWS EC2 and grabbed a free domain through the student benefits pack on Namecheap.
 
 ## How It Works
 The landing page links back to the Github repository, https://github.com/mjip/backend-coding-challenge. 
 
-### Endpoint
+### The Endpoint
 I've created a REST API endpoint that will provide autocomplete suggestions in JSON format, exposed at `/suggestions`. 
 Simply pass the partial search term through the query parameter `q` and a list of possible locations will be returned with a score based on how likely it read your mind. Location coordinates can be optionally passed with `latitude` and `longitude` parameters. 
 
