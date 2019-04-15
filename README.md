@@ -95,6 +95,7 @@ Simply pass the partial search term through the query parameter `q` and a list o
 ```
 
 If no results are returned, it also searches among alternative names in the database.
+
 `GET /suggestions?q=YXX`
 
 ```JSON
@@ -130,6 +131,7 @@ sudo pip install pipenv
 To run the app on your localhost, clone this repository, launch pipenv and run `app.py` within its shell:
 ```bash
 git clone https://github.com/mjip/backend-coding-challenge
+cd backend-coding-challenge
 
 pipenv install
 pipenv shell
