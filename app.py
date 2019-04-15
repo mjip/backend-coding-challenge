@@ -17,9 +17,9 @@ APP_CONFIG = {
 }
 
 # Create the application instance
-app = Flask(__name__, template_folder="templates")
-app.config.update(APP_CONFIG)
-api = Api(app)
+application = Flask(__name__, template_folder="templates")
+application.config.update(APP_CONFIG)
+api = Api(application)
 
 # Manage database connection
 def connect_db():
@@ -33,14 +33,14 @@ def get_db():
 		g.db = connect_db()
 	return g.db
 
-@app.teardown_appcontext
+@application.teardown_appcontext
 def teardown_db(error):
 	if hasattr(g, 'db'):
 		g.db.close()
 
 
 # Create a URL route in our application for "/"
-@app.route('/')
+@application.route('/')
 def home():
 	"""
 	This function just responds to the browser URL
@@ -57,7 +57,7 @@ suggestions_args = {
 }
 
 # REST endpoint page
-@app.route('/suggestions', methods=['GET'])
+@application.route('/suggestions', methods=['GET'])
 @use_args(suggestions_args)
 def suggestions_endpoint(args):
 	"""
@@ -80,4 +80,4 @@ def suggestions_endpoint(args):
 
 # Run the app
 if __name__ == '__main__':
-	app.run()
+	application.run(host='0.0.0.0', port=80)
