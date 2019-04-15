@@ -3,7 +3,7 @@ from flask import (Flask, request, jsonify,
 					abort)
 from flask_restful import Resource, Api, reqparse
 from webargs import fields, validate
-from webargs.flaskparser import use_kwargs, parser
+from webargs.flaskparser import use_args, parser
 
 import sqlite3
 
@@ -13,7 +13,7 @@ from backend import *
 APP_CONFIG = {
 	"ENV": "development",
 	"DEBUG": True,
-	"IMAGE_FOLDER": 'static/img'
+	"JSON_SORT_KEYS": False
 }
 
 # Create the application instance
@@ -23,7 +23,7 @@ api = Api(app)
 
 # Manage database connection
 def connect_db():
-	connection = sqlite3.connect('geonames.db')
+	connection = sqlite3.connect('data/geonames.db')
 	return connection
 
 connection = connect_db()
@@ -36,7 +36,7 @@ def get_db():
 @app.teardown_appcontext
 def teardown_db(error):
 	if hasattr(g, 'db'):
-		db.close()
+		g.db.close()
 
 
 # Create a URL route in our application for "/"
@@ -50,36 +50,32 @@ def home():
 	"""
 	return render_template('home.html')
 
+suggestions_args = {
+	'q': fields.Str(required=True),
+	'latitude': fields.Float(required=False),
+	'longitude': fields.Float(required=False)
+}
 
 # REST endpoint page
 @app.route('/suggestions', methods=['GET'])
-def suggestions_endpoint():
+@use_args(suggestions_args)
+def suggestions_endpoint(args):
 	"""
 
 	:return: 		the JSON string with the suggestion
 	"""
 	conn = get_db()
 
-	args = request.args
+	q = args['q']
+	latitude = None
+	longitude = None
+	if 'latitude' in args:
+		latitude = args['latitude']
+	if 'longitude' in args:
+		longitude = args['longitude']
 
-	# If query not specified, return empty dict with no suggestions key
-	if 'q' not in args:	return {}
+	result = get_autocomplete(conn, q, latitude, longitude)
 
-	query = args['q']
-	if 'lat' in args: 
-		latitude = args['lat'] 
-	else: 
-		latitude = None
-	if 'long' in args: 
-		longitude = args['long'] 
-	else: 
-		longitude = None
-
-	print(query)
-	print(latitude)
-	print(longitude)
-
-	result = {"suggestions": []}
 	return jsonify(result)		
 
 # Run the app
