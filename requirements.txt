@@ -1,0 +1,11 @@
+# app.py: 1
+Flask == 1.0.2
+
+# app.py: 4
+Flask_RESTful == 0.3.7
+
+# data/populate_db_from_tsv.py: 2
+pandas == 0.24.1
+
+# app.py: 6
+webargs == 5.3.0
