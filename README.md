@@ -1,6 +1,7 @@
 # my-autocomplete
 
-autocomplete-mjip-challenge.me 
+http://autocomplete-mjip-challenge.me 
+
 My submission of the backend challenge for Coveo.
 - Author: Marie Payne
 
