@@ -1,7 +1,6 @@
 from flask import (Flask, request, jsonify,
 					render_template, g, redirect,
 					abort)
-from flask_restful import Resource, Api, reqparse
 from webargs import fields, validate
 from webargs.flaskparser import use_args, parser
 
@@ -13,13 +12,13 @@ from backend import *
 APP_CONFIG = {
 	"ENV": "development",
 	"DEBUG": True,
-	"JSON_SORT_KEYS": False
+	"JSON_SORT_KEYS": False,
+	"DATABASE": 'data/genomes.db'
 }
 
 # Create the application instance
 application = Flask(__name__, template_folder="templates")
 application.config.update(APP_CONFIG)
-api = Api(application)
 
 # Manage database connection
 def connect_db():
