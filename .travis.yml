@@ -13,7 +13,7 @@ script: true
   - nosetests --with-coverage --coverage report
 
 script:
-  - pytest
+  - pytest conftest.py
 
 after_script:
   - coveralls
