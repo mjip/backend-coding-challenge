@@ -7,9 +7,10 @@ python:
 install:
   - pip install --upgrade pip
   - pip install pipenv
-  - pipenv install --system --skip-lock
+  - pipenv install
+  - pipenv shell
   - pip install -r requirements.txt
 
 script: 
-  - sudo python app.py
+  - sudo python3 app.py
 
