@@ -120,7 +120,10 @@ def compute_loc_score_metric(suggestion_entities, lat_center, long_center):
 	total_distance = sum(distances)
 
 	for i in range(len(suggestion_entities)):
-		score = 1.0 - (distances[i] / total_distance)
+		if len(suggestion_entities) == 1:
+			score = 1.0
+		else:
+			score = 1.0 - (distances[i] / total_distance)
 		suggestion_entities[i]['score'] = format(score, '.2f')
 
 	suggestion_entities = sorted(suggestion_entities, key=lambda k: k['score'], reverse=True)
