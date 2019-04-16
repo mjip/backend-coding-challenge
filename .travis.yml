@@ -6,11 +6,18 @@ python:
 
 install:
   - pip install --upgrade pip
-  - pip install pipenv
-  - pipenv install
-  - pipenv shell
   - pip install -r requirements.txt
+  - pip install coverage
 
-script: 
-  - sudo python3 app.py
+script: true
+  - nosetests --with-coverage --coverage report
+
+script:
+  - pytest
+
+after_script:
+  - coveralls
+
+after_success:
+  - codecov
 
