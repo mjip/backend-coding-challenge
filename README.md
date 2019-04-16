@@ -1,4 +1,4 @@
-# my-autocomplete
+# my-autocomplete [![Build Status](https://travis-ci.org/mjip/backend-coding-challenge.svg?branch=master)](https://travis-ci.org/mjip/backend-coding-challenge)
 
 http://autocomplete-mjip-challenge.me 
 

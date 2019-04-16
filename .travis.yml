@@ -1,0 +1,14 @@
+dist: trusty
+sudo: true
+language: python
+python:
+  - "3.6"
+
+install:
+  - pip install --upgrade pip
+  - pip install pipenv
+  - pipenv install --system --skip-lock
+
+script: 
+  - python app.py
+
